@@ -13,8 +13,8 @@
 %   v1: The transmission line’s voltage at the first time step, V(x,k)
 %   bc0 = The voltage entering the left end of the transmission line, V(0, t)
 %   bcl: The voltage entering the right end of the transmission line, V(length, t)
-%   h: The space step to be used (s)
-%   k: The time step to be used (m)
+%   h: The space step to be used (m)
+%   k: The time step to be used (s)
 %
 % Output:
 %   x: A matrix of space values corresponding to where the voltage has been evaluated.
