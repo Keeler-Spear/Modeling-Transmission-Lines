@@ -35,7 +35,7 @@ del = 1 / (a +b);
 eps = 2 * a - G *R - 2 * h2;
 mu = b - a;
 
-%Stability Check - Checks every case of the inequality
+% Stability Check - Checks every case of the inequality
 lambda0 = abs(del / 2 * (eps + 2 * h2) + sqrt((del * (eps + 2 * h2))^2 + 4 * del * mu) / 2);
 if (lambda0 > 1)
     error(sprintf('This method is unstable! λ = %.4f', lambda0));
