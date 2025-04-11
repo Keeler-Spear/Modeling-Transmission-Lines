@@ -13,7 +13,7 @@ k = 0.001; % The time step to be used (s)
 % Solves the telegrapher's equation
 [x, t, V] = teEqCT(l, c, r, g, len, time, @f0, @f1, @g0, @gl, h, k);
 
-%P lots the solution to the telegrapher's equation
+% Plots the solution to the telegrapher's equation
 mesh(x, t, V)
 xlabel('Position (m)')
 ylabel('Time (s)')
