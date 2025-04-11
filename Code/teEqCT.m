@@ -13,8 +13,8 @@
 %   v1: The transmission line’s voltage at the first time step, V(x,k)
 %   bc0 = The voltage entering the left end of the transmission line, V(0, t)
 %   bcl: The voltage entering the right end of the transmission line, V(length, t)
-%   h: The space step to be used (m)
-%   k: The time step to be used (s)
+%   h: The space step to be used (s)
+%   k: The time step to be used (m)
 %
 % Output:
 %   x: A matrix of space values corresponding to where the voltage has been evaluated.
@@ -31,6 +31,35 @@ h2 = 1. / (h * h);
 y = 1 ./ (a + b);
 d = 2 * a - G * R - 2 * h2;
 u = b - a;
+del = 1 / (a +b);
+eps = 2 * a - G *R - 2 * h2;
+mu = b - a;
+
+%Stability Check - Checks every case of the inequality
+lambda0 = abs(del / 2 * (eps + 2 * h2) + sqrt((del * (eps + 2 * h2))^2 + 4 * del * mu) / 2);
+if (lambda0 > 1)
+    error(sprintf('This method is unstable! λ = %.4f', lambda0));
+end
+lambda1 = abs(del / 2 * (eps + 2 * h2) - sqrt((del * (eps + 2 * h2))^2 + 4 * del * mu) / 2);
+if (lambda1 > 1)
+    error(sprintf('This method is unstable! λ = %.4f', lambda1));
+end
+lambda2 = abs(del / 2 * (eps - 2 * h2) + sqrt((del * (eps - 2 * h2))^2 + 4 * del * mu) / 2);
+if (lambda2 > 1)
+    error(sprintf('This method is unstable! λ = %.4f', lambda2));
+end
+lambda3 = abs(del / 2 * (eps - 2 * h2) - sqrt((del * (eps - 2 * h2))^2 + 4 * del * mu) / 2);
+if (lambda3 > 1)
+    error(sprintf('This method is unstable! λ = %.4f', lambda3));
+end
+lambda2 = abs(del / 2 * (eps) + sqrt((del * eps)^2 + 4 * del * mu) / 2);
+if (lambda3 > 1)
+    error('This method is unstable! λ = ' + lambda4)
+end
+lambda5 = abs(del / 2 * (eps) - sqrt((del * eps)^2 + 4 * del * mu) / 2);
+if (lambda5 > 1)
+    error(sprintf('This method is unstable! λ = %.4f', lambda5));
+end
 
 % Creating axes for plotting
 x = linspace(0, length, xMax);
